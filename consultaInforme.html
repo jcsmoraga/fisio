@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta Informes</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Consulta Informes</h1>
+        
+        <div class="form-group">
+            <label for="pacienteId">Paciente:</label>
+            <input type="text" id="pacienteId" name="pacienteId" placeholder="Escribe el nombre o apellido del paciente" required oninput="searchPacientes('pacienteId', 'pacienteResultsList', 'http://localhost:8082/paciente/search')">
+            <ul id="pacienteResultsList"></ul>
+        </div>
+
+        <div class="button-container">
+            <button type="button" class="btn" onclick="fetchInformes()">
+                <i class="fas fa-search"></i> Consultar Informes
+            </button>
+            <button type="button" id="returnButton" class="btn btn-return">
+                <i class="fas fa-arrow-left"></i> Volver al Menú
+            </button>
+        </div>
+
+        <div class="table-container">
+            <table id="informesTable" class="hidden">
+                <thead>
+                    <tr>
+                        <th>Fisioterapeuta</th>
+                        <th>Detalle del Informe</th>
+                        <th>Resumen del Informe</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody id="informesTableBody">
+                   
+                </tbody>
+            </table>
+        </div>
+
+     
+        <div class="export-buttons">
+            <a href="javascript:void(0)" id="exportCsvButton" class="export-icon" onclick="exportToCsv()">
+                <i class="fas fa-file-csv"></i>
+            </a>
+            <a href="javascript:void(0)" id="exportPdfButton" class="export-icon" onclick="exportToPdf()">
+                <i class="fas fa-file-pdf"></i>
+            </a>
+        </div>
+
+        <div id="errorMessage" class="hidden"></div>
+    </div>
+
+    <script src="pacienteSearch.js"></script>
+    <script src="returnButton.js"></script>
+    <script src="consultaInforme.js"></script>  
+</body>
+</html>
